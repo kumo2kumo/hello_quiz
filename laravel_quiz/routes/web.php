@@ -19,4 +19,5 @@ Route::get('/quiz', function () {
     return view('quiz.index');
 });
 
+
 Route::view('/exp', 'exp', ['name' => 'Taylor']);

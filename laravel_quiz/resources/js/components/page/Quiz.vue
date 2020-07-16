@@ -1,8 +1,7 @@
 <template>
   <div>
-
+<!-- !TODO: 6-6のクイズをapiからもらってくるところから 7.16 -->
     <the-header></the-header>
-
     <main>
       <div class="container">
         <article class="col-md-8 col-xs-12">
@@ -87,6 +86,20 @@ export default {
     TheFooter,
     TheHeader,
     TheSidebar,
-  }
+  },
+
+  data(){
+    return {
+      quizData:[],
+    }
+  },
+
+  mounted(){
+    const categories = this.$route.query.categories;
+    this.$http.get('/api/quiz?categories=${categories}').then(response => {
+      this.quizData = response.data;
+      console.log(this.quizData);
+    });
+  },
 }
 </script>
