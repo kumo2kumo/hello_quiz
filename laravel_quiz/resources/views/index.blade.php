@@ -12,10 +12,10 @@
   <p>ゆきち</p>
   <p>yukichi</p>
   <div id="app">
-    <app />
+    <router-view />
   </div>
-
-  <script src="/js/home.js"></script>
+  <!-- router追加したらsrcも変化 -->
+  <script src="/js/app.js"></script>
 </body>
 
 </html>

@@ -12,6 +12,7 @@
   <div id="app">@{{ message }}</div>
 
   <script>
+    console.log('yukichi')
     let app = new Vue({
       el: '#app',
       data: {

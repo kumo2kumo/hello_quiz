@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import App from './components/page/Home'
-import App from './components/page/Quiz'
+import Home from './components/page/Home'
+import Quiz from './components/page/Quiz'
 
 Vue.use(Router)
 
