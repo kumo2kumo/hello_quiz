@@ -12,5 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+Route::get('/quiz', function () {
+    return view('quiz.index');
+});
+
+Route::get('/exp', function () {
+    return view('exp');
 });
