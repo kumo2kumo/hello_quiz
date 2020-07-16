@@ -17,30 +17,17 @@
               <img class="home-quiz__setting-h2-logo" src="/images/directory-icon.png" />出題設定
             </h2>
             <form action="/quiz" method="post">
-              <label>
-                <input type="checkbox" name="categories[]" value="1" checked />ハロプロ全般
+            
+              <label v-for="(cate, index) in category" :key="index">
+                <input type="checkbox" v-model="categories" :value="cate.id">{{cate.name}}
               </label>
-              <label>
-                <input type="checkbox" name="categories[]" value="2" />モーニング娘。
-              </label>
-              <label>
-                <input type="checkbox" name="categories[]" value="3" />アンジュルム
-              </label>
-              <label>
-                <input type="checkbox" name="categories[]" value="4" />Juice=Juice
-              </label>
-              <label>
-                <input type="checkbox" name="categories[]" value="5" />つばきファクトリー
-              </label>
-              <label>
-                <input type="checkbox" name="categories[]" value="6" />BEYOOOOONDS
-              </label>
+              
               <div class>
                 全項目チェック
                 <button type="button" name="check_all" id="check-all" value="1">ON</button>
                 <button type="button" name="check_all_off" id="check-all-off" value="1">OFF</button>
               </div>
-              <button type="submit" class="btn btn-primary">出題開始</button>
+              <button type="submit" class="btn btn-primary" @click.stop.prevent="goQuiz()">出題開始</button>
               <input type="hidden" name="_token" value />
             </form>
           </section>
@@ -67,9 +54,9 @@
             <h2 class="home__notice-h2">
               <img class="home__notice-h2-logo" src="/images/news-icon.png" />お知らせ情報
             </h2>
-            <dl>
-              <dt>2019/08/23</dt>
-              <dd>サイトを開設しました。</dd>
+            <dl v-for="(info, index) in information" :key="index">
+              <dt>{{ info.created_at }}</dt>
+              <dd>{{ info.information }}</dd>
             </dl>
           </section>
         </article>
@@ -97,6 +84,31 @@ export default {
     TheHeader,
     TheSidebar,
     BarChart,
+  },
+  data(){
+    return{
+      categories: [1],
+      information: [],
+      category: [],
+    };
+  },
+
+  mounted(){
+    this.$http.get("/api/category").then(response=>{
+      this.category = response.data;
+    })
+
+    this.$http.get("/api/information").then(response => {
+      this.information = response.data;
+    })
+  },
+
+  methods: {
+    goQuiz(){
+      // リロードすることなくURL変更可能
+      this.$router.push("/quiz?categories=" + this.categories);
+    }
   }
+  
 }
 </script>
