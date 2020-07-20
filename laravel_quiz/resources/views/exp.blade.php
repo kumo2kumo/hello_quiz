@@ -9,6 +9,7 @@
 
 <body>
   <p>hello</p>
+  <p>{{ $name }}</p>
   <div id="app">@{{ message }}</div>
 
   <script>
